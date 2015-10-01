@@ -17,10 +17,10 @@ Currently, COMPUTER handles commands for the following applications:
 * **deadbeef**: Play/Pause; Next track; Last track.
 * **talking-clock**: Have the computer speak to you the time and current weather.
 * **scrot**: Take a screenshot of the X screen.
-* **fswebcam**: Have your webcam take a photo.
+* **fswebcam**: Take a photo with your USB webcam.
 * **wordnet**: Select some text and have the computer speak back to you the top definitions.
 
-More are on the way, I promise!
+More integrations are on the way, I promise!
 
 ## Dependencies
 
