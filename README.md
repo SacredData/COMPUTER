@@ -30,6 +30,21 @@ The audio feedback is delivered via ALSA.
 
 Of course, if you want to make use of all available voice commands, you'll need to install the apps listed above. ;)
 
+## Setup
+
+First, clone the repo.
+
+Next, you may need to get some packages from pip:
+
+`pip2 install pyjulius pyyaml`
+
+While in the top-level directory of the repo, perform the following commands **in order**:
+
+```
+./julius -input mic -C Sample.jconf -module
+python2 computer.py
+```
+
 ## I Wanna Say Stuff!
 
 OK. Once everything is up and running, try these phrases out:
