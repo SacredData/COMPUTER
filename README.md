@@ -24,6 +24,8 @@ More integrations are on the way, I promise!
 
 ## Dependencies
 
+**This is a Python 2 program.** I don't know what kind of madness will happen if you try to run this with Python 3. My guess is that nothing will work.
+
 You'll need to install Julius, or you may prefer to use the Julius binary included in the repo. It should work on most standard x86_64 systems.
 
 The audio feedback is delivered via ALSA.
