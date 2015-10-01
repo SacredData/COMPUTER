@@ -2,7 +2,7 @@
 
 ![COMPUTER! WHAT THE FUCK!](http://originaldave77.files.wordpress.com/2014/03/picards-computer.jpg)
 
-Go ahead. Talk to your computer.
+Go ahead. He can hear you now.
 
 ## About
 
@@ -21,3 +21,23 @@ Currently, COMPUTER handles commands for the following applications:
 * **wordnet**: Select some text and have the computer speak back to you the top definitions.
 
 More are on the way, I promise!
+
+## Dependencies
+
+You'll need to install Julius, or you may prefer to use the Julius binary included in the repo. It should work on most standard x86_64 systems.
+
+The audio feedback is delivered via ALSA.
+
+Of course, if you want to make use of all available voice commands, you'll need to install the apps listed above. ;)
+
+## I Wanna Say Stuff!
+
+OK. Once everything is up and running, try these phrases out:
+
+*"Computer: say time"*
+
+*"Computer: define selection"* (Highlight text before saying this command.)
+
+*"Computer: start music"* (Open deadbeef first.)
+
+*"Computer: switch to window two"*
