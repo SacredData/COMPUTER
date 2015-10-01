@@ -18,5 +18,6 @@ Currently, COMPUTER handles commands for the following applications:
 * **talking-clock**: Have the computer speak to you the time and current weather.
 * **scrot**: Take a screenshot of the X screen.
 * **fswebcam**: Have your webcam take a photo.
+* **wordnet**: Select some text and have the computer speak back to you the top definitions.
 
 More are on the way, I promise!
