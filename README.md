@@ -1,5 +1,7 @@
 # COMPUTER
 
+![COMPUTER! WHAT THE FUCK!](http://originaldave77.files.wordpress.com/2014/03/picards-computer.jpg)
+
 Go ahead. Talk to your computer.
 
 ## About
