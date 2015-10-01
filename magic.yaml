@@ -1,0 +1,10 @@
+---
+magic_words:
+    deadbeef: music
+    deadbeef: track
+    scrot: screenshot
+    talking-clock: time
+    sh: todo
+    i3-msg: switch
+    fswebcam: selfie
+    copyq: paste

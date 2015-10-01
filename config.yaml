@@ -1,0 +1,37 @@
+---
+applications:
+    deadbeef:
+        phrases:
+            computer start music: --play
+            computer stop music: --stop
+            computer pause music: --pause
+            computer next track: --next
+            computer last track: --prev
+    scrot:
+        phrases:
+            computer take screenshot: "%Y-%m-%d_$wx$h.png"
+    talking-clock:
+        phrases:
+            computer say time: -c
+    sh:
+        phrases:
+            computer say todo: scripts/todo.sh
+    i3-msg:
+        phrases:
+            computer switch to sublime: workspace 3
+            computer switch to browser: workspace 10
+            computer switch to window one: workspace 1
+            computer switch to window two: workspace 2
+            computer switch to window three: workspace 3
+            computer switch to window four: workspace 4
+            computer switch to window five: workspace 5
+            computer switch to window six: workspace 6
+            computer switch to window seven: workspace 7
+            computer switch to window eight: workspace 8
+            computer switch to window nine: workspace 9
+    fswebcam:
+        phrases:
+            computer take selfie: -r 640x480
+    copyq:
+        phrases:
+            computer paste to window: paste
