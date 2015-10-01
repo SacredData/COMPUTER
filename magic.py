@@ -32,4 +32,8 @@ def magicWord(voca):
         print "Magic word is paste"
         print "App is copyq"
         app_key = "copyq"
+    elif any(substring in 'define' for substring in voca):
+        print "Magic word is define"
+        print "App is sh"
+        app_key = "sh"
     return app_key

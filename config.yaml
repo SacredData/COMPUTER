@@ -16,6 +16,7 @@ applications:
     sh:
         phrases:
             computer say todo: scripts/todo.sh
+            computer define selection: scripts/def.sh
     i3-msg:
         phrases:
             computer switch to sublime: workspace 3

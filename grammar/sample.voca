@@ -12,6 +12,7 @@ TIME       t ay m
 SEARCH     s er ch
 TODO       t uw d uw
 SELFIE     s eh l f iy
+SELECTION  s ah l eh k sh ah n
 
 % CALL
 CALL       k ao l
@@ -22,6 +23,7 @@ TAKE       t ey k
 SAY        s ey
 NEXT       n eh k s t 
 LAST       l ae s t 
+DEFINE     d ih f ay n
 
 % ADDRESS
 COMPUTER   k ah m p y uw t er
