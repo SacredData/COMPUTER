@@ -12,13 +12,13 @@ I have always been really jealous that Captain Picard could just yell, "Computer
 
 Currently, COMPUTER handles commands for the following applications:
 
-* **i3-wm**: Switch windows; switch to specific apps.
-* **copyq**: Paste the contents of your clipboard into the presently in-focus X application.
-* **deadbeef**: Play/Pause; Next track; Last track.
-* **talking-clock**: Have the computer speak to you the time and current weather.
-* **scrot**: Take a screenshot of the X screen.
-* **fswebcam**: Take a photo with your USB webcam.
-* **wordnet**: Select some text and have the computer speak back to you the top definitions. (Makes use of the **espeak** CLI application to vocalize the definitions.)
+* [**i3-wm**](https://github.com/i3/i3): Switch windows; switch to specific apps.
+* [**copyq**](https://github.com/hluk/CopyQ): Paste the contents of your clipboard into the presently in-focus X application.
+* [**deadbeef**](https://github.com/Alexey-Yakovenko/deadbeef): Play/Pause; Next track; Last track.
+* [**talking-clock**](https://github.com/stormdragon2976/talking-clock): Have the computer speak to you the time and current weather.
+* [**scrot**](https://github.com/dreamer/scrot): Take a screenshot of the X screen.
+* [**fswebcam**](https://github.com/fsphil/fswebcam): Take a photo with your USB webcam.
+* [**wordnet**](https://github.com/wordnet/wordnet): Select some text and have the computer speak back to you the top definitions. (Makes use of the [**espeak**](https://github.com/eeejay/espeak) CLI application to vocalize the definitions.)
 
 More integrations are on the way, I promise!
 
