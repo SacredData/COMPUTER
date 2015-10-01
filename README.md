@@ -56,3 +56,42 @@ OK. Once everything is up and running, try these phrases out:
 *"Computer: start music"* (Open deadbeef first.)
 
 *"Computer: switch to window two"*
+
+## Custom Grammars and Vocabulary
+
+This is an area that I need to improve upon. Currently, it is a bit of an endeavor to add your own custom voice commands, but it _can_ be done.
+
+#### Changing the vocabulary
+
+COMPUTER's vocabulary can be found in `grammar/sample.voca`. It should look something like this:
+
+```
+....
+% APPS
+INTERNET   ih n t er n eh t
+BROWSER    b r aw z er        
+SUBLIME    s ah b l ay m
+
+% GENERAL
+WINDOW     w ih n d ow
+
+% DESCRIPTOR
+ZERO       z iy r ow
+ONE        w ah n
+TWO        t uw
+THREE      th r iy
+FOUR       f ao r
+....
+```
+
+A `%` at the front of the line indicates a vocab CLASS. You should add words where they make the most sense, categorically. You can also add your own classes, but this means that you'll also need to change COMPUTER's grammar file. Only mess with this file if you kinda know what you're doing!
+
+You may use the included dictionary (`grammar/VoxForgeDict.txt`) to find the correct phonetic representations of the words you're adding to the vocabulary file.
+
+Once you've made your modifications, run the perl script within the grammar/ directory like so:
+
+`perl mkdfa.pl sample`
+
+#### Configuring your new vocabulary items
+
+Once you have successfully built the new grammar data for Julius, you have to modify the `magic.py` python2 file and the `config.yaml` included in the top level of the COMPUTER repo. This part should be self-explanitory.
