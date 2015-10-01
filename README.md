@@ -18,7 +18,7 @@ Currently, COMPUTER handles commands for the following applications:
 * **talking-clock**: Have the computer speak to you the time and current weather.
 * **scrot**: Take a screenshot of the X screen.
 * **fswebcam**: Take a photo with your USB webcam.
-* **wordnet**: Select some text and have the computer speak back to you the top definitions.
+* **wordnet**: Select some text and have the computer speak back to you the top definitions. (Makes use of the **espeak** CLI application to vocalize the definitions.)
 
 More integrations are on the way, I promise!
 
