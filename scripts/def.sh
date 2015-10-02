@@ -8,4 +8,4 @@ base="$(dirname $script)"
 
 wn "$WORD" -over | grep '1\.' > "$base/def_out"
 
-espeak -f "$base/def_out"
+espeak -f "$base/def_out" -v en-us
