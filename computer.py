@@ -33,9 +33,9 @@ try:
         try:
             result = client.results.get(False)
         except Queue.Empty:
+            time.sleep(0.2)
             continue
         print repr(result)
-        print result
         voca = str(result).split()
         app_key = magicWord(voca)
         time_str = str(time.time())
@@ -46,6 +46,7 @@ try:
                     print phr
                     cmd = [app_key, cc[app_key]['phrases'][phr]]
                     sp.check_call(cmd)
+                    time.sleep(0.2)
 
 except KeyboardInterrupt:
     print 'Exiting...'
