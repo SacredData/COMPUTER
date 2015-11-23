@@ -59,6 +59,8 @@ OK. Once everything is up and running, try these phrases out:
 
 *"Computer: switch to window two"*
 
+Please note, however, that these commands are tuned to my particular accent of English (think: Jew from New York City.) If your dialect of English is too different from mine (think: Dirty South, USA and Cockney, UK) you may need to revise the `sample.voca` file. Calfironia folks, on the other hand, will probably be fine without any modifications.
+
 ## Custom Grammars and Vocabulary
 
 This is an area that I need to improve upon. Currently, it is a bit of an endeavor to add your own custom voice commands, but it _can_ be done.
