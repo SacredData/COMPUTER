@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import pyjulius
+import threading
 import Queue
 import subprocess as sp
 import sys
@@ -17,39 +18,74 @@ for data in mconfig:
     m = data
 cc = c['applications']
 mm = m['magic_words']
+q = Queue.Queue()  # Task queue
 
 # Initialize and try to connect
 client = pyjulius.Client('localhost', 10500)
 try:
     client.connect()
 except pyjulius.ConnectionError:
-    print 'Start julius as module first!'
+    print '"You will first need to start julius as a module."'
     sys.exit(1)
 
 # Start listening to the server
 client.start()
-try:
-    while 1:
-        try:
-            result = client.results.get(False)
-        except Queue.Empty:
-            time.sleep(0.85)
-            continue
-        print repr(result)
-        voca = str(result).split()
-        app_key = magicWord(voca)
-        time_str = str(time.time())
-        selfie_save = 'selfies/' + time_str + '.jpeg'
-        if isinstance(app_key, basestring):
-            for phr in cc[app_key]['phrases']:
-                if str(result) in phr:
-                    print phr
-                    cmd = [app_key, cc[app_key]['phrases'][phr]]
-                    sp.check_call(cmd)
-                    time.sleep(0.5)
 
-except KeyboardInterrupt:
-    print 'Exiting...'
-    client.stop()  # send the stop signal
-    client.join()  # wait for the thread to die
-    client.disconnect()  # disconnect from julius
+
+def listen():
+    try:
+        while 1:
+            try:
+                result = client.results.get(False)
+                voca = str(result).split()
+                app_key = magicWord(voca)
+                if isinstance(app_key, basestring):
+                    for phr in cc[app_key]['phrases']:
+                        if str(result) in phr:
+                            print '"I shall run ', phr, ' for you."'
+                            cmd = [app_key, cc[app_key]['phrases'][phr]]
+                            q.put(cmd)
+                            # sp.check_call(cmd)
+                            time.sleep(0.5)
+                        else:
+                            print '"I am unable to find that command for you."'
+                            time.sleep(2)
+            except Queue.Empty:
+                time.sleep(0.85)
+                continue
+    except KeyboardInterrupt:
+        print '"Good day to you."'
+        client.stop()  # send the stop signal
+        client.join()  # wait for the thread to die
+        client.disconnect()  # disconnect from julius
+
+
+class ComputerTasks(threading.Thread):
+
+    def __init__(self, queue):
+        threading.Thread.__init__(self)
+        self.queue = queue
+
+    def run(self):
+        while 1:
+            try:
+                task_cmd = self.queue.get()
+                try:
+                    sp.check_call(task_cmd)
+                finally:
+                    self.queue.task_done()
+            except Queue.Empty:
+                time.sleep(1)
+                continue
+
+
+def main():
+    # spawn a pool of threads
+    for i in xrange(4):
+        t = ComputerTasks(q)
+        t.setDaemon(True)
+        t.start()
+    listen()
+
+main()
+print '"Goodbye."'
