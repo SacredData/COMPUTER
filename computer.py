@@ -24,6 +24,7 @@ q = Queue.Queue()  # Task queue
 client = pyjulius.Client('localhost', 10500)
 try:
     client.connect()
+    print '"You have successfully connected to me. Congrats, boss."'
 except pyjulius.ConnectionError:
     print '"You will first need to start julius as a module."'
     sys.exit(1)
@@ -65,11 +66,14 @@ class ComputerTasks(threading.Thread):
     def __init__(self, queue):
         threading.Thread.__init__(self)
         self.queue = queue
+        print '"Hello, my Lord! I have established a new task thread for you."'
 
     def run(self):
+        print '"It would appear that the task thread is running."'
         while 1:
             try:
                 task_cmd = self.queue.get()
+                print '"I have taken a task out of the queue, my liege."'
                 try:
                     sp.check_call(task_cmd)
                 finally:
@@ -81,11 +85,10 @@ class ComputerTasks(threading.Thread):
 
 def main():
     # spawn a pool of threads
-    for i in xrange(4):
+    for i in xrange(2):
         t = ComputerTasks(q)
         t.setDaemon(True)
         t.start()
     listen()
 
 main()
-print '"Goodbye."'
