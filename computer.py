@@ -1,9 +1,10 @@
 #!/usr/bin/env python
+import logging
 import pyjulius
-import threading
 import Queue
 import subprocess as sp
 import sys
+import threading
 import yaml
 from magic import magicWord
 
@@ -18,10 +19,11 @@ except pyjulius.ConnectionError:
 
 # Start listening to the server
 client.start()
-# Establish configs and queues
+# Establish configs, logs, and queues
+q = Queue.Queue()                 # Task queue
 cfile = open('config.yaml', 'r')  # Global config YAML
-cconfig = yaml.load_all(cfile)
 mfile = open('magic.yaml', 'r')   # Magic words YAML
+cconfig = yaml.load_all(cfile)
 mconfig = yaml.load_all(mfile)
 for data in cconfig:
     c = data
@@ -29,11 +31,13 @@ for data in mconfig:
     m = data
 cc = c['applications']
 mm = m['magic_words']
-q = Queue.Queue()                 # Task queue
+logging.basicConfig(filename='COMPUTER.log', level=logging.DEBUG,
+                    format='%(asctime)s %(message)s')
 
 
 def listen():
     "Listen to a connected Julius client and place its commands into the queue."
+    logging.info('Beginning Julius listener module...')
     try:
         while 1:
             try:
@@ -46,15 +50,19 @@ def listen():
                 if isinstance(app_key, basestring):
                     for phr in cc[app_key]['phrases']:
                         if str(result) in phr:
-                            print '"I shall run ', str(result), ' for you."'
+                            logging.info('Matched %s with %s', str(phr), str(result))
                             cmd = [app_key, cc[app_key]['phrases'][phr]]
                             q.put(cmd)  # Place command into task queue
+                            logging.info('Added cmd %s to queue with %s tasks',
+                                         cmd, q.qsize())
                             q.join()    # Await completion of all tasks
+                            logging.info('Queue cleared')
                         else:
                             continue
             except Queue.Empty:
                 continue
     except KeyboardInterrupt:
+        logging.warning('Keyboard interrupt activated by the user!')
         print '"A good day to you and a blessed \'morrow as well."'
         client.stop()  # send the stop signal
         client.join()  # wait for the thread to die
@@ -68,20 +76,26 @@ class ComputerTasks(threading.Thread):
     def __init__(self, queue):
         threading.Thread.__init__(self)
         self.queue = queue
-        print '"Hello, my Lord! I have established a new task thread for you."'
+        logging.info('New task thread established.')
 
     def run(self):
-        print '"It would appear that the task thread is running."'
+        logging.info('Task thread is running a command.')
+        # print '"It would appear that the task thread is running."'
         while 1:
             try:
                 task_cmd = self.queue.get()
-                print '"I have taken a task out of the queue, my liege."'
                 try:
+                    logging.info('Running command: %s', task_cmd)
                     sp.check_call(task_cmd)
                 except sp.CalledProcessError:
+                    logging.error('Command process error: %s', task_cmd)
                     print '"Oh my! An error has my jimmies very rustled."'
+                    logging.warning('Skipping command: %s', task_cmd)
+                    continue
                 finally:
                     self.queue.task_done()
+                    logging.info('Command cleaved from task queue: %s',
+                                 task_cmd)
             except Queue.Empty:
                 continue
 
