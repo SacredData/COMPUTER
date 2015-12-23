@@ -7,18 +7,6 @@ import sys
 import yaml
 from magic import magicWord
 
-cfile = open('config.yaml', 'r')
-cconfig = yaml.load_all(cfile)
-mfile = open('magic.yaml', 'r')
-mconfig = yaml.load_all(mfile)
-for data in cconfig:
-    c = data
-for data in mconfig:
-    m = data
-cc = c['applications']
-mm = m['magic_words']
-q = Queue.Queue()  # Task queue
-
 # Initialize and try to connect
 client = pyjulius.Client('localhost', 10500)
 try:
@@ -30,22 +18,38 @@ except pyjulius.ConnectionError:
 
 # Start listening to the server
 client.start()
+# Establish configs and queues
+cfile = open('config.yaml', 'r')  # Global config YAML
+cconfig = yaml.load_all(cfile)
+mfile = open('magic.yaml', 'r')   # Magic words YAML
+mconfig = yaml.load_all(mfile)
+for data in cconfig:
+    c = data
+for data in mconfig:
+    m = data
+cc = c['applications']
+mm = m['magic_words']
+q = Queue.Queue()                 # Task queue
 
 
 def listen():
+    "Listen to a connected Julius client and place its commands into the queue."
     try:
         while 1:
             try:
+                # Get voice match from the Julius client
                 result = client.results.get(False)
+                # Split the result so we can search substrings for magic words
                 voca = str(result).split()
+                # Use the key obtained to scan the config YAML for commands
                 app_key = magicWord(voca)
                 if isinstance(app_key, basestring):
                     for phr in cc[app_key]['phrases']:
                         if str(result) in phr:
                             print '"I shall run ', str(result), ' for you."'
                             cmd = [app_key, cc[app_key]['phrases'][phr]]
-                            q.put(cmd)
-                            q.join()
+                            q.put(cmd)  # Place command into task queue
+                            q.join()    # Await completion of all tasks
                         else:
                             continue
             except Queue.Empty:
@@ -58,6 +62,8 @@ def listen():
 
 
 class ComputerTasks(threading.Thread):
+
+    "A threaded worker class which seeks to clear out the task queue."
 
     def __init__(self, queue):
         threading.Thread.__init__(self)
@@ -81,7 +87,7 @@ class ComputerTasks(threading.Thread):
 
 
 def main():
-    # spawn a pool of threads
+    # spawn worker threads
     for i in xrange(2):
         t = ComputerTasks(q)
         t.setDaemon(True)
