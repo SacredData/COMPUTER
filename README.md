@@ -2,7 +2,11 @@
 
 ![COMPUTER! WHAT THE FUCK!](http://originaldave77.files.wordpress.com/2014/03/picards-computer.jpg)
 
-Go ahead. He can hear you now.
+COMPUTER is a Python 2 program that enables users to control their modern Linux workstations with easy voice commands. Using the Julius continuous speech recognition decoder, users may effortlessly extend the COMPUTER command vocabulary, customize outcomes, and even integrate new applications. (COMPUTER also has limited voice feedback and response capabilities; additional features of this nature are currently under development.)
+
+Once up and running, using COMPUTER is pretty routine. Address your new software servant by eliciting the voice command, *"Computer"*. Then, complete your sentence with whatever whimsical computing desires you conjure up. Perhaps you'd like COMPUTER to *"say the time"*, or while you've got some crazy word highlighted, you'd like COMPUTER to *"define selection"*. If you've got a webcam, maybe you want COMPUTER to *"take a selfie"*, and if you don't have a webcam, I'm sure you'll love telling deadbeef to *"play next track"* and scrot to *"take screenshot"*.
+
+COMPUTER allows you to leverage your single-greatest communicative asset available: your own natural speaking voice. Many people understandably prefer typing over using a computer mouse, but sometimes even typing becomes encumbered with the same mechanical inefficiency issues. 
 
 ## About
 
