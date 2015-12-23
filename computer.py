@@ -4,7 +4,6 @@ import threading
 import Queue
 import subprocess as sp
 import sys
-import time
 import yaml
 from magic import magicWord
 
@@ -43,19 +42,16 @@ def listen():
                 if isinstance(app_key, basestring):
                     for phr in cc[app_key]['phrases']:
                         if str(result) in phr:
-                            print '"I shall run ', phr, ' for you."'
+                            print '"I shall run ', str(result), ' for you."'
                             cmd = [app_key, cc[app_key]['phrases'][phr]]
                             q.put(cmd)
-                            # sp.check_call(cmd)
-                            time.sleep(0.5)
+                            q.join()
                         else:
-                            print '"I am unable to find that command for you."'
-                            time.sleep(2)
+                            continue
             except Queue.Empty:
-                time.sleep(0.85)
                 continue
     except KeyboardInterrupt:
-        print '"Good day to you."'
+        print '"A good day to you and a blessed \'morrow as well."'
         client.stop()  # send the stop signal
         client.join()  # wait for the thread to die
         client.disconnect()  # disconnect from julius
@@ -76,10 +72,11 @@ class ComputerTasks(threading.Thread):
                 print '"I have taken a task out of the queue, my liege."'
                 try:
                     sp.check_call(task_cmd)
+                except sp.CalledProcessError:
+                    print '"Oh my! An error has my jimmies very rustled."'
                 finally:
                     self.queue.task_done()
             except Queue.Empty:
-                time.sleep(1)
                 continue
 
 

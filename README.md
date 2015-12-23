@@ -8,6 +8,10 @@ Go ahead. He can hear you now.
 
 I have always been really jealous that Captain Picard could just yell, "Computer!" followed by a few terse commands, and get the results he wanted back from his ship in return. So, I dug up some old work I did with Julius and made this thing that controls a modern Linux desktop with voice commands.
 
+### Credits
+
+COMPUTER would not be possible without the work of Antoine Bertin, author of the [pyjulius](https://github.com/Diaoul/pyjulius) Python 2 module.
+
 ## What can COMPUTER do?
 
 Currently, COMPUTER handles commands for the following applications:
@@ -28,9 +32,9 @@ More integrations are on the way, I promise!
 
 You'll need to install Julius, or you may prefer to use the Julius binary included in the repo. It should work on most standard x86_64 systems.
 
-The audio feedback is delivered via ALSA.
-
 Of course, if you want to make use of all available voice commands, you'll need to install the apps listed above. ;)
+
+I've designed COMPUTER to use default audio devices and subdevices as configured by the OS, hopefully enabling most properly-setup machines to get started right away. However, the audio feedback is delivered via ALSA, and trust me when I say that your ALSA config will be tested to its limits when working with COMPUTER. If audio input doesn't work, check out your ALSA config file at `~/.asoundrc`. Make sure that you've made the proper audio input the ALSA default. I can't help you with your asoundrc file, because frankly, it's a miracle of Science that my own config works at all. But I've included my asoundrc as an example in this repo. Hopefully it will help!
 
 ## Setup
 
@@ -53,7 +57,7 @@ OK. Once everything is up and running, try these phrases out:
 
 *"Computer: say time"*
 
-*"Computer: define selection"* (Highlight text before saying this command.)
+*"Computer: define selection"* (Highlight an English word before saying this command.)
 
 *"Computer: start music"* (Open deadbeef first.)
 
