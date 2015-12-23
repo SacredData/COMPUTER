@@ -61,9 +61,9 @@ def listen():
                 continue
     except KeyboardInterrupt:
         logging.warning('Keyboard interrupt activated by the user!')
-        print '"A good day to you and a blessed \'morrow as well."'
-        client.stop()  # send the stop signal
-        client.join()  # wait for the thread to die
+        print '"Good day to you."'
+        client.stop()        # send the stop signal
+        client.join()        # wait for the thread to die
         client.disconnect()  # disconnect from julius
 
 
@@ -78,7 +78,6 @@ class ComputerTasks(threading.Thread):
 
     def run(self):
         logging.info('Task thread is running a command.')
-        # print '"It would appear that the task thread is running."'
         while 1:
             try:
                 task_cmd = self.queue.get()
