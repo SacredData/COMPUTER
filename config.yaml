@@ -21,15 +21,15 @@ applications:
         phrases:
             computer switch to sublime: workspace 3
             computer switch to browser: workspace 10
-            computer switch to window one: workspace 1
-            computer switch to window two: workspace 2
-            computer switch to window three: workspace 3
-            computer switch to window four: workspace 4
-            computer switch to window five: workspace 5
-            computer switch to window six: workspace 6
-            computer switch to window seven: workspace 7
-            computer switch to window eight: workspace 8
-            computer switch to window nine: workspace 9
+            computer switch to one: workspace 1
+            computer switch to two: workspace 2
+            computer switch to three: workspace 3
+            computer switch to four: workspace 4
+            computer switch to five: workspace 5
+            computer switch to six: workspace 6
+            computer switch to seven: workspace 7
+            computer switch to eight: workspace 8
+            computer switch to nine: workspace 9
     fswebcam:
         phrases:
             computer take selfie: -r 640x480
