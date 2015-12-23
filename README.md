@@ -2,15 +2,11 @@
 
 ![COMPUTER! WHAT THE FUCK!](http://originaldave77.files.wordpress.com/2014/03/picards-computer.jpg)
 
-COMPUTER is a Python 2 program that enables users to control their modern Linux workstations with easy voice commands. Using the Julius continuous speech recognition decoder, users may effortlessly extend the COMPUTER command vocabulary, customize outcomes, and even integrate new applications. (COMPUTER also has limited voice feedback and response capabilities; additional features of this nature are currently under development.)
-
-Once up and running, using COMPUTER is pretty routine. Address your new software servant by eliciting the voice command, *"Computer"*. Then, complete your sentence with whatever whimsical computing desires you conjure up. Perhaps you'd like COMPUTER to *"say the time"*, or while you've got some crazy word highlighted, you'd like COMPUTER to *"define selection"*. If you've got a webcam, maybe you want COMPUTER to *"take a selfie"*, and if you don't have a webcam, I'm sure you'll love telling deadbeef to *"play next track"* and scrot to *"take screenshot"*.
-
-COMPUTER allows you to leverage your single-greatest communicative asset available: your own natural speaking voice. Many people understandably prefer typing over using a computer mouse, but sometimes even typing becomes encumbered with the same mechanical inefficiency issues. 
-
 ## About
 
-I have always been really jealous that Captain Picard could just yell, "Computer!" followed by a few terse commands, and get the results he wanted back from his ship in return. So, I dug up some old work I did with Julius and made this thing that controls a modern Linux desktop with voice commands.
+COMPUTER is a Python 2 program that enables users to control their modern Linux workstations with easy voice commands. Using the Julius continuous speech recognition decoder, users may effortlessly extend the COMPUTER command vocabulary, customize outcomes, and even integrate new applications. (COMPUTER also has limited voice feedback and response capabilities; additional features of this nature are currently under development.)
+
+Once up and running, using COMPUTER is pretty routine. Address your new software servant by eliciting the voice command, *"Computer"*. Then, complete your sentence with whatever whimsical computing desires you conjure up. See the example voice commands below.
 
 ### Credits
 
@@ -22,7 +18,7 @@ Currently, COMPUTER handles commands for the following applications:
 
 * [**i3-wm**](https://github.com/i3/i3): Switch windows; switch to specific apps.
 * [**copyq**](https://github.com/hluk/CopyQ): Paste the contents of your clipboard into the presently in-focus X application.
-* [**deadbeef**](https://github.com/Alexey-Yakovenko/deadbeef): Play/Pause; Next track; Last track.
+* [**mpd**](https://github.com/Alexey-Yakovenko/deadbeef) - COMING SOON: Play/Pause; Next track; Last track.
 * [**talking-clock**](https://github.com/stormdragon2976/talking-clock): Have the computer speak to you the time and current weather.
 * [**scrot**](https://github.com/dreamer/scrot): Take a screenshot of the X screen.
 * [**fswebcam**](https://github.com/fsphil/fswebcam): Take a photo with your USB webcam.
