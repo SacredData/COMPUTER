@@ -17,9 +17,7 @@ except pyjulius.ConnectionError:
     print '"You will first need to start julius as a module."'
     sys.exit(1)
 
-# Start listening to the server
-client.start()
-# Establish configs, logs, and queues
+client.start()                    # Start listening to the server
 q = Queue.Queue()                 # Task queue
 cfile = open('config.yaml', 'r')  # Global config YAML
 mfile = open('magic.yaml', 'r')   # Magic words YAML
@@ -71,7 +69,7 @@ def listen():
 
 class ComputerTasks(threading.Thread):
 
-    "A threaded worker class which seeks to clear out the task queue."
+    "A threaded worker class which seeks to clear out the COMPUTER task queue."
 
     def __init__(self, queue):
         threading.Thread.__init__(self)
