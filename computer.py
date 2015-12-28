@@ -8,7 +8,7 @@ import threading
 import yaml
 from magic import magicWord
 
-# Initialize and try to connect
+# Initialize and try to connect to Julius module
 client = pyjulius.Client('localhost', 10500)
 try:
     client.connect()
@@ -17,24 +17,26 @@ except pyjulius.ConnectionError:
     print '"You will first need to start julius as a module."'
     sys.exit(1)
 
-client.start()                    # Start listening to the server
-q = Queue.Queue()                 # Task queue
-cfile = open('config.yaml', 'r')  # Global config YAML
-mfile = open('magic.yaml', 'r')   # Magic words YAML
+client.start()
+q = Queue.Queue()
+# Global config yaml
+cfile = open('config.yaml', 'r')
 cconfig = yaml.load_all(cfile)
-mconfig = yaml.load_all(mfile)
 for data in cconfig:
     c = data
+cc = c['applicaitons']
+# Magic words yaml
+mfile = open('magic.yaml', 'r')
+mconfig = yaml.load_all(mfile)
 for data in mconfig:
     m = data
-cc = c['applications']
 mm = m['magic_words']
 logging.basicConfig(filename='COMPUTER.log', level=logging.DEBUG,
                     format='%(asctime)s %(message)s')
 
 
 def listen():
-    "Listen to a connected Julius client and place its commands into the queue."
+    "Listen to a connected Julius client and place its commands into a queue."
     logging.info('Beginning Julius listener module...')
     try:
         while 1:
@@ -48,7 +50,8 @@ def listen():
                 if isinstance(app_key, basestring):
                     for phr in cc[app_key]['phrases']:
                         if str(result) in phr:
-                            logging.info('Matched %s with %s', str(phr), str(result))
+                            logging.info('Matched %s with %s', str(phr),
+                                            str(result))
                             cmd = [app_key, cc[app_key]['phrases'][phr]]
                             q.put(cmd)  # Place command into task queue
                             logging.info('Added cmd %s to queue with %s tasks',
@@ -63,7 +66,8 @@ def listen():
         logging.warning('Keyboard interrupt activated by the user!')
         print '"Good day to you."'
         client.stop()        # send the stop signal
-        client.join()        # wait for the thread to die
+	q.join()             # wait for the task queue to die
+        client.join()        # wait for the Juluys thread to die
         client.disconnect()  # disconnect from julius
 
 
