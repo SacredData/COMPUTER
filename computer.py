@@ -109,6 +109,7 @@ class ComputerTasks(threading.Thread):
 
 
 def main():
+    logging.info('Beginning main initialization...')
     for i in xrange(2):      # Two threads should do the trick
         t = ComputerTasks(q)
         t.setDaemon(True)    # Daemonize each threaded worker
