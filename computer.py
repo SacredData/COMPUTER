@@ -7,7 +7,10 @@ import sys
 import threading
 import yaml
 
-# Initialize and try to connect to Julius module
+# Instantiate logger
+logging.basicConfig(filename='COMPUTER.log', level=logging.DEBUG,
+                    format='%(asctime)s %(message)s')
+# Initialize client and try to connect it to a running Julius module
 client = pyjulius.Client('localhost', 10500)
 try:
     client.connect()
@@ -17,21 +20,23 @@ except pyjulius.ConnectionError:
     sys.exit(1)
 
 client.start()
+logging.info('Client started')
 q = Queue.Queue()
+logging.info('Task queue instantiated')
 # Global config yaml
 cfile = open('config.yaml', 'r')
 cconfig = yaml.load_all(cfile)
 for data in cconfig:
     c = data
 cc = c['applicaitons']
+logging.info('Loaded global config from config.yaml')
 # Magic words yaml
 mfile = open('magic.yaml', 'r')
 mconfig = yaml.load_all(mfile)
 for data in mconfig:
     m = data
 mm = m['magic_words']
-logging.basicConfig(filename='COMPUTER.log', level=logging.DEBUG,
-                    format='%(asctime)s %(message)s')
+logging.info('Loaded magic words config from magic.yaml')
 
 
 def listen():
@@ -59,6 +64,8 @@ def listen():
                             q.join()    # Await completion of all tasks
                             logging.info('Queue cleared')
                         else:
+                            logging.info('Command %s yielded no match',
+                                         str(result))
                             continue
             except Queue.Empty:
                 continue
@@ -102,10 +109,9 @@ class ComputerTasks(threading.Thread):
 
 
 def main():
-    # spawn worker threads
-    for i in xrange(2):
+    for i in xrange(2):      # Two threads should do the trick
         t = ComputerTasks(q)
-        t.setDaemon(True)
+        t.setDaemon(True)    # Daemonize each threaded worker
         t.start()
     listen()
 
