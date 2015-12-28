@@ -6,7 +6,6 @@ import subprocess as sp
 import sys
 import threading
 import yaml
-from magic import magicWord
 
 # Initialize and try to connect to Julius module
 client = pyjulius.Client('localhost', 10500)
@@ -37,6 +36,7 @@ logging.basicConfig(filename='COMPUTER.log', level=logging.DEBUG,
 
 def listen():
     "Listen to a connected Julius client and place its commands into a queue."
+    from magic import magicWord
     logging.info('Beginning Julius listener module...')
     try:
         while 1:
@@ -51,7 +51,7 @@ def listen():
                     for phr in cc[app_key]['phrases']:
                         if str(result) in phr:
                             logging.info('Matched %s with %s', str(phr),
-                                            str(result))
+                                         str(result))
                             cmd = [app_key, cc[app_key]['phrases'][phr]]
                             q.put(cmd)  # Place command into task queue
                             logging.info('Added cmd %s to queue with %s tasks',
@@ -66,7 +66,7 @@ def listen():
         logging.warning('Keyboard interrupt activated by the user!')
         print '"Good day to you."'
         client.stop()        # send the stop signal
-	q.join()             # wait for the task queue to die
+        q.join()             # wait for the task queue to die
         client.join()        # wait for the Juluys thread to die
         client.disconnect()  # disconnect from julius
 
