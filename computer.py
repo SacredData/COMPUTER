@@ -6,9 +6,11 @@ import subprocess as sp
 import sys
 import threading
 import yaml
-from magic import magicWord
 
-# Initialize and try to connect
+# Instantiate logger
+logging.basicConfig(filename='COMPUTER.log', level=logging.DEBUG,
+                    format='%(asctime)s %(message)s')
+# Initialize client and try to connect it to a running Julius module
 client = pyjulius.Client('localhost', 10500)
 try:
     client.connect()
@@ -17,24 +19,29 @@ except pyjulius.ConnectionError:
     print '"You will first need to start julius as a module."'
     sys.exit(1)
 
-client.start()                    # Start listening to the server
-q = Queue.Queue()                 # Task queue
-cfile = open('config.yaml', 'r')  # Global config YAML
-mfile = open('magic.yaml', 'r')   # Magic words YAML
+client.start()
+logging.info('Client started')
+q = Queue.Queue()
+logging.info('Task queue instantiated')
+# Global config yaml
+cfile = open('config.yaml', 'r')
 cconfig = yaml.load_all(cfile)
-mconfig = yaml.load_all(mfile)
 for data in cconfig:
     c = data
+cc = c['applicaitons']
+logging.info('Loaded global config from config.yaml')
+# Magic words yaml
+mfile = open('magic.yaml', 'r')
+mconfig = yaml.load_all(mfile)
 for data in mconfig:
     m = data
-cc = c['applications']
 mm = m['magic_words']
-logging.basicConfig(filename='COMPUTER.log', level=logging.DEBUG,
-                    format='%(asctime)s %(message)s')
+logging.info('Loaded magic words config from magic.yaml')
 
 
 def listen():
-    "Listen to a connected Julius client and place its commands into the queue."
+    "Listen to a connected Julius client and place its commands into a queue."
+    from magic import magicWord
     logging.info('Beginning Julius listener module...')
     try:
         while 1:
@@ -48,7 +55,8 @@ def listen():
                 if isinstance(app_key, basestring):
                     for phr in cc[app_key]['phrases']:
                         if str(result) in phr:
-                            logging.info('Matched %s with %s', str(phr), str(result))
+                            logging.info('Matched %s with %s', str(phr),
+                                         str(result))
                             cmd = [app_key, cc[app_key]['phrases'][phr]]
                             q.put(cmd)  # Place command into task queue
                             logging.info('Added cmd %s to queue with %s tasks',
@@ -56,6 +64,8 @@ def listen():
                             q.join()    # Await completion of all tasks
                             logging.info('Queue cleared')
                         else:
+                            logging.info('Command %s yielded no match',
+                                         str(result))
                             continue
             except Queue.Empty:
                 continue
@@ -63,7 +73,8 @@ def listen():
         logging.warning('Keyboard interrupt activated by the user!')
         print '"Good day to you."'
         client.stop()        # send the stop signal
-        client.join()        # wait for the thread to die
+        q.join()             # wait for the task queue to die
+        client.join()        # wait for the Juluys thread to die
         client.disconnect()  # disconnect from julius
 
 
@@ -98,10 +109,9 @@ class ComputerTasks(threading.Thread):
 
 
 def main():
-    # spawn worker threads
-    for i in xrange(2):
+    for i in xrange(2):      # Two threads should do the trick
         t = ComputerTasks(q)
-        t.setDaemon(True)
+        t.setDaemon(True)    # Daemonize each threaded worker
         t.start()
     listen()
 

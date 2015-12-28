@@ -36,3 +36,7 @@ applications:
     copyq:
         phrases:
             computer paste to window: paste
+    task:
+        phrases:
+            computer task next: next
+            computer task start: next start
