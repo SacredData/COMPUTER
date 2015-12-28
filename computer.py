@@ -28,7 +28,7 @@ cfile = open('config.yaml', 'r')
 cconfig = yaml.load_all(cfile)
 for data in cconfig:
     c = data
-cc = c['applicaitons']
+cc = c['applications']
 logging.info('Loaded global config from config.yaml')
 # Magic words yaml
 mfile = open('magic.yaml', 'r')
