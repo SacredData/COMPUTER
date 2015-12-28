@@ -2,9 +2,9 @@
 def magicWord(voca):
     app_key = None
     if any(substring in 'task' for substring in voca):
-	print "Magic word is 'task'"
-	print "App is taskwarrior"
-	app_key = "task"
+        print "Magic word is 'task'"
+        print "App is taskwarrior"
+        app_key = "task"
     if any(substring in 'music' for substring in voca):
         print "Magic word is 'music'"
         print "App is deadbeef"
