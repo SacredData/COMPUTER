@@ -44,21 +44,7 @@ Next, you may need to get some packages from pip:
 
 `pip2 install pyjulius pyyaml`
 
-While in the top-level directory of the repo, you will want to perform the following commands **in order**:
-
-```
-# You may need to futz with the command arguments for optimal performance.
-# Pay special attention to the -rejectshort and -rejectlong parameters (expressed in ms).
-# Depending upon your speaking style you may need to modify these values.
-# Check Sample.jconf for a list of arguments and their parameters
-./julius -input alsa -C Sample.jconf -module -rejectshort 500 -rejectlong 6000
-```
-
-Next, in a separate terminal:
-
-```
-python2 computer.py
-```
+Next, simply execute `./start_computer`. Once you do this, COMPUTER should be ready to go.
 
 ## I Wanna Say Stuff!
 
