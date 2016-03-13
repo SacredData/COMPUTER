@@ -1,0 +1,5 @@
+#/bin/bash
+
+./julius -input alsa -C Sample.jconf -module -rejectshort 500 -rejectlong 6000 & 
+
+python2 computer.py
