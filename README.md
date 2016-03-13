@@ -18,7 +18,7 @@ Currently, COMPUTER handles commands for the following applications:
 
 * [**i3-wm**](https://github.com/i3/i3): Switch windows; switch to specific apps.
 * [**copyq**](https://github.com/hluk/CopyQ): Paste the contents of your clipboard into the presently in-focus X application.
-* [**mpd**](https://github.com/Alexey-Yakovenko/deadbeef) - COMING SOON: Play/Pause; Next track; Last track.
+* [**ncmpcpp**](http://rybczak.net/ncmpcpp/) - COMING SOON: Play/Pause; Next track; Last track.
 * [**talking-clock**](https://github.com/stormdragon2976/talking-clock): Have the computer speak to you the time and current weather.
 * [**scrot**](https://github.com/dreamer/scrot): Take a screenshot of the X screen.
 * [**fswebcam**](https://github.com/fsphil/fswebcam): Take a photo with your USB webcam.
