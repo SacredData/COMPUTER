@@ -47,9 +47,11 @@ Next, you may need to get some packages from pip:
 While in the top-level directory of the repo, you will want to perform the following commands **in order**:
 
 ```
-# You may need to futz with the command arguments for optimal performance
+# You may need to futz with the command arguments for optimal performance.
+# Pay special attention to the -rejectshort and -rejectlong parameters (expressed in ms).
+# Depending upon your speaking style you may need to modify these values.
 # Check Sample.jconf for a list of arguments and their parameters
-./julius -input alsa -C Sample.jconf -module -rejectshort 5 
+./julius -input alsa -C Sample.jconf -module -rejectshort 500 -rejectlong 6000
 ```
 
 Next, in a separate terminal:
@@ -62,13 +64,13 @@ python2 computer.py
 
 OK. Once everything is up and running, try these phrases out:
 
-*"Computer: say time"*
+*"Computer: say time"* - Says the time to you via talking-clock.
 
-*"Computer: define selection"* (Highlight an English word before saying this command.)
+*"Computer: define selection"* (Highlight an English word before saying this command.) - Speaks top definition results from wordnet back to you.
 
-*"Computer: start music"* (Open deadbeef first.)
+*"Computer: start music"* - Plays first track in Deadbeef. (ncmpcpp support coming soon!)
 
-*"Computer: switch to window two"*
+*"Computer: switch to three"* - Move to 3rd desktop in i3
 
 Please note, however, that these commands are tuned to my particular accent of English (think: Jew from New York City.) If your dialect of English is too different from mine (think: Dirty South, USA and Cockney, UK) you may need to revise the `sample.voca` file. Calfironia folks, on the other hand, will probably be fine without any modifications.
 
